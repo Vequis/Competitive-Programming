@@ -1,9 +1,0 @@
-Direct-Address-Search(T, k)
-    return T[k]
-
-Direct-Address-Insert(T, x)
-    T[x.chave] = x
-
-Direct-Address-Delete(T, x)
-    T[x.chave] = NIL
-    
