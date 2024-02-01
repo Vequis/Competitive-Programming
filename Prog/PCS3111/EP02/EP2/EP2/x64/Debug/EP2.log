@@ -1,0 +1,15 @@
+﻿  Agendador.cpp
+  Chat.cpp
+  Evento.cpp
+  FilaComPrioridade.cpp
+  Hospedeiro.cpp
+  No.cpp
+  PersistenciaDeRede.cpp
+  Rede.cpp
+  Roteador.cpp
+  RoteadorComQoS.cpp
+  TabelaDeRepasse.cpp
+  main.cpp
+  Gerando Código...
+C:\Users\Usuario\Documents\Competitive-Programming\Prog\PCS3111\EP02\EP2\EP2\Agendador.cpp(26): warning C4715: 'Agendador::agendar': nem todos os caminhos de controle retornam um valor
+  EP2.vcxproj -> C:\Users\Usuario\Documents\Competitive-Programming\Prog\PCS3111\EP02\EP2\x64\Debug\EP2.exe

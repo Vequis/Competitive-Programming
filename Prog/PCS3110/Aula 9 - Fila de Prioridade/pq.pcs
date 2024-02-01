@@ -1,0 +1,77 @@
+Pai(i)
+Filho-Esquerda(i)
+Filho-Direita(i)
+Max-Heapify(A, i)
+Inicializa-Max-Heap(A)
+
+Extrai-Maior(A)
+    if A.heap-size < 1
+        error "underflow"
+    maior = A[1]
+    A[1] = A[A.heap-size]
+    A.heap-size--
+    Max-Heapify(A, 1)
+    return maior
+
+Inserir-Maxheap(A, chave)
+    if A.heap-size == A.tamanho
+        error "overflow"
+    A.heap-size++
+    A[A.heap-size] = chave
+    i = A.heap-size
+    while i > 0 and chave > A[pai(i)]
+        A[i] = A[pai(i)]
+        i = pai(i)
+        A[i] = chave
+
+Altera-Prioridade(A, indice, chave)
+    A[indice] = chave
+    if chave < A[pai(i)]
+        Max-Heapify(A, indice)
+    else 
+        i = indice
+        while i > 0 and chave > A[pai(i)]
+            A[i] = A[pai(i)]
+            i = pai(i)
+            A[i] = chave
+
+Main()
+
+
+Pai(i)
+    return i/2
+
+Filho-Esquerda(i)
+    return 2*i
+
+Filho-Direita(i)
+    return 2*i + 1
+
+Max-Heapify(A, i)
+    esquerda = Filho-Esquerda(i)
+    direita = Filho-Direita(i)
+
+    ind_maior = NIL
+
+    if esquerda <= A.heap-size and A[esquerda] > A[i]
+        ind_maior = esquerda
+    else 
+        ind_maior = i
+
+    if direita <= A.heap-size and A[direita] > A[ind_maior]
+        ind_maior = direita
+    else 
+        ind_maior = i
+
+    if ind_maior != i 
+        temp = A[i]
+        A[i] = A[ind_maior]
+        A[ind_maior] = temp     
+
+    Max-Heapify(A, ind_maior)
+
+Inicializa-Max-Heap(A)
+    A.heap-size = A.tamanho
+
+    for i = A.heap-size/2 downto i
+        Max-Heapify(A, i)

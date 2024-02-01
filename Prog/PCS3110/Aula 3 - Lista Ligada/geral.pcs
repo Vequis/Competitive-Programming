@@ -1,0 +1,61 @@
+List-Search(L, k) // Retorna NIL se k !E L  
+    x = L.inicio
+    while x != NIL and x.chave != k
+        x = x.proximo
+
+    return x
+
+List-Insert(L,x) //No começo da lista
+    x.proximo = L.inicio
+    L.inicio = x
+
+List-Delete(L, x)
+    if L.inicio == x
+        L.inicio = x.proximo
+    else 
+        e = L.inicio
+
+        while e.proximo != x
+            e = e.proximo
+        
+        e.proximo = x.proximo
+
+List-Insert-End(L, k)
+    Seja e um novo elemento
+    e.chave = k
+    e.proximo = NIL
+
+    if(L.inicio == NIL)
+        L.inicio = e
+    else
+        x = L.inicio
+        while x.proximo != NIL
+            x = x.proximo
+        
+        x.proximo = e
+
+
+Circular-Insert(L, x)
+    y = L.inicio
+
+    if y == NIL
+        L.inicio = x
+        x.proximo = x
+    else 
+        x.proximo = L.inicio.proximo
+        L.inicio.proximo = x
+
+Main()
+    Seja L uma nova ListaLigada
+
+    Seja e1 um novo elemento
+    e1.chave = 4;
+    e1.proximo = NIL
+    List-Insert(L, e1)
+    
+    Seja e1 um novo elemento
+    e1.chave = 4;
+    e1.proximo = NIL
+    List-Insert(L, e1)
+
+

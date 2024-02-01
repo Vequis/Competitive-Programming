@@ -1,0 +1,48 @@
+Mergesort(A, inicio, fim)
+    if inicio >= fim
+        return
+
+    meio = \lfloor (inicio + fim) / 2\rfloor 
+
+    Mergesort(A, inicio, meio)
+    Mergesort(A, meio + 1, fim)
+    Merge(A, inicio, fim)
+
+Merge(A, inicio, fim)
+    Seja aux um novo vetor
+    meio = \lfloor (inicio + fim) / 2\rfloor 
+    j = meio + 1
+    k = inicio
+
+    for i in 1 to meio
+        while j <= final A[j] < A[i]
+            aux[k] = A[j]
+            k++
+            j++
+        
+        aux[k] = A[i]
+        k++
+
+    for i in j to final
+        aux[k] = A[i]
+        k++
+
+Merge_Levy(A, inicio, meio, fim)
+    n1 = meio - inicio + 1
+    n2 = fim - meio
+    Sejam E[1..n1 + 1] e D[1..n2 + 1] novos Vetores
+    for i = 1 to n1
+        E[i] = A[inicio + i - 1]
+    for j = 1 to n2
+        D[j] = A[meio + j]
+    E[n1 + 1] = \inf 
+    D[n2 + 1] = \inf 
+    
+    i = 1
+    j = 1
+    for k = inicio to fim
+        if E[i] <= D[j]
+            A[k] = E[i]
+            i = i + 1
+        else A[k] = D[j]
+            j = j + 1

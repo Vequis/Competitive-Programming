@@ -1,0 +1,44 @@
+Segment Tree
+Codeforces EDU
+1 - 
+ - Implementação
+	-Build
+	-Update
+	-Query
+ - Qualquer função comutativa
+2 - 
+ - Problema da max sum
+	-max
+	-pref
+	-suf
+	-sum
+ - k-th one
+ - first_above(x)
+3 - 
+ - Inversions
+	-Meio greedy
+	- Atualizações enquanto processa
+	- soma em p[i]+1, n
+	- Põe 1 no lugar
+ - Restaurar permutação
+	- k-th one a partir do fim
+	- Coloca 0 na posição
+	- Temos quantos maiores que está antes, então vemos o k+1-th a partir da esquerda, visto que assim passamos pelos k maiores
+	- Meio greedy: Consideramos que o elemento atual é sempre o mais da direita
+ - Nested Segments
+	- Vai em ordem
+	- Se primeira vez que ve o num, coloca num vetor
+	- Senão, adiciona 1
+	- e coloca na resp a soma entre os indices
+	- Essa soma representa a quantidade de conjuntos fechados entre esses dois
+ - Intersecting
+	- Analogo ao anterior
+	- Se é a primeira vez, coloca 1 na segtree
+	- Senão, updata pra 0
+	- Faz a soma entre os segmentos
+	- A soma representa a quantidade de conjuntos abertos
+ - Prob soma de ranges
+	- Adiciona val em l
+	- Retira val em r
+	- Faz a soma entre 1 e indice
+	- Cuidado com os limites

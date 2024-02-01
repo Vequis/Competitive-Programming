@@ -1,0 +1,25 @@
+# depslib dependency file v1.0
+1631536625 source:c:\users\usuario\documents\competitive-programming\prog\pcs3111\teste\musica.cpp
+	<iostream>
+	<string>
+	"Musica.h"
+
+1631536619 c:\users\usuario\documents\competitive-programming\prog\pcs3111\teste\musica.h
+	<string>
+
+1631538483 source:c:\users\usuario\documents\competitive-programming\prog\pcs3111\teste\playlist.cpp
+	"Playlist.h"
+	"Musica.h"
+	<string>
+	<iostream>
+
+1631538343 c:\users\usuario\documents\competitive-programming\prog\pcs3111\teste\playlist.h
+	<string>
+	"Musica.h"
+
+1632141505 source:c:\users\usuario\documents\competitive-programming\prog\pcs3111\teste\teste.cpp
+	<iostream>
+	"Musica.h"
+	"Playlist.h"
+	<string>
+

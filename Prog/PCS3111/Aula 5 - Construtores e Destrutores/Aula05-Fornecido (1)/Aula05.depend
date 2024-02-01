@@ -1,0 +1,24 @@
+# depslib dependency file v1.0
+1632143203 source:c:\users\usuario\documents\competitive-programming\prog\pcs3111\aula 5 - construtores e destrutores\aula05-fornecido (1)\musica.cpp
+	<iostream>
+	<string>
+	"Musica.h"
+
+1632142840 c:\users\usuario\documents\competitive-programming\prog\pcs3111\aula 5 - construtores e destrutores\aula05-fornecido (1)\musica.h
+	<string>
+
+1632143899 source:c:\users\usuario\documents\competitive-programming\prog\pcs3111\aula 5 - construtores e destrutores\aula05-fornecido (1)\teste.cpp
+	<iostream>
+	"Musica.h"
+	"Artista.h"
+	<string>
+
+1621158986 c:\users\usuario\documents\competitive-programming\prog\pcs3111\aula 5 - construtores e destrutores\aula05-fornecido (1)\artista.h
+	<string>
+	"Musica.h"
+
+1632144362 source:c:\users\usuario\documents\competitive-programming\prog\pcs3111\aula 5 - construtores e destrutores\aula05-fornecido (1)\artista.cpp
+	<iostream>
+	<string>
+	"Artista.h"
+

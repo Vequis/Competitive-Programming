@@ -1,0 +1,45 @@
+
+//Implementações com vetor
+
+Empty(S)
+    return S.topo == 0
+
+Push(S, k)
+    if S.topo == S.tamanho
+        error "overflow"
+    else
+        S.topo++;
+        S[S.topo] = k
+    
+Pop(S)
+    if S.topo == 0
+        error "underflow"
+    else 
+        S.topo--;
+        return S[S.topo + 1]
+
+//Ex de aula
+//S: 15 6 2 9
+//a) Push(S,17) Push(S,3) 
+// S: 15 6 2 9 17 3
+//b) Pop(S), Pop(S), Push(S, 0)
+// S: 15 6 0
+
+//Implementações com lista ligada
+Empty(S)
+    return L.inicio == NIL
+
+Push(S, k)
+    Seja x um novo elemento
+    x.chave = k
+
+    x.proximo = L.inicio
+    L.inicio = x
+
+Pop(S)
+    if Empty(S)
+        error "underflow"
+    else
+        y = L.inicio
+        L.inicio = L.inicio.proximo
+        return y.chave
