@@ -37,14 +37,15 @@ int pai[maxn];
 int peso[maxn];
 aresta mst[maxm]; //Aqui guardaremos a arvore
 
+//sem binary lifting
 int find(int x){
     if(pai[x] == x) return x;
-    return pai[x] = find(pai[x]);
+    return pai[x] = find(pai[x]); //path compression
 }
 
 void join(int a, int b){
-    a = pai[a];
-    b = pai[b];
+    a = find(a);
+    b = find(b);
 
     if(peso[a] > peso[b]) pai[b] = a;
     else if(peso[a] < peso[b]) pai[a] = b;
