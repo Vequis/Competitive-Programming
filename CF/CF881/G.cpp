@@ -89,18 +89,12 @@ int kruskalmod() {
         int a = arestas[i].a;
         int b = arestas[i].b;
         if(find(a) != find(b)){
-            // cout << a << ' ' << find(a) << ' ' << peso[find(a)] << endl;
-            // cout << b << ' ' << find(b) << ' ' << peso[find(b)] << endl;
 
             int base = (s - arestas[i].peso + 1)%MODN;
             int expo = (peso[find(a)]*peso[find(b)] - 1);
             resp = (resp*power(base, expo))%MODN;
-            // cout << resp << ' ';
-            // resp = (resp + power(base, expo) - 1);
-            // cout << base << ' ' << expo << ' ' << resp << endl;
+            
             join(a,b);
-            // mst[++size] = arestas[i];
-            // if(size==n-1) return;
         }
     }
 
