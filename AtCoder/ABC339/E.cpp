@@ -17,14 +17,12 @@
 #define INF 0x3f3f3f3f
 #define MODN 1000000007
 #define int long long // -> solução divina
-#define maxn 112345
+#define maxn 512345
 
 using namespace std;
 
 int a[maxn];
 int tree[4*maxn + 1];
-
-//1-indexado se n me engano
 
 void build(int node, int tl, int tr){
     if(tl == tr){
@@ -35,14 +33,14 @@ void build(int node, int tl, int tr){
         build(2*node, tl, tm);
         build(2*node+1, tm+1, tr);
 
-        tree[node] = tree[2*node] + tree[2*node+1];
+        tree[node] = max(tree[2*node], tree[2*node+1]);
     }
 }
 
 void update(int node, int tl, int tr, int idx, int val){
     if(tl == tr){
-        a[idx] += val;
-        tree[node] += val;
+        a[idx] = val;
+        tree[node] = val;
     } else {
         int tm = tl + (tr - tl)/2;
 
@@ -52,23 +50,54 @@ void update(int node, int tl, int tr, int idx, int val){
             update(2*node+1, tm+1, tr, idx, val);
         }
 
-        tree[node] = tree[2*node] + tree[2*node+1];
+        tree[node] = max(tree[2*node], tree[2*node+1]);
     }
 }
 
-int sum(int node, int tl, int tr, int l, int r){
-    if(r < tl || tr < l) return 0;
+int query(int node, int tl, int tr, int l, int r){
+    if(r < tl || tr < l) return -1;
     if(l<=tl && tr <= r) return tree[node];
 
     int tm = tl + (tr - tl)/2;
 
-    int p1 = sum(2*node, tl, tm, l, r);
-    int p2 = sum(2*node+1, tm+1, tr, l, r);
+    int p1 = query(2*node, tl, tm, l, r);
+    int p2 = query(2*node+1, tm+1, tr, l, r);
 
-    return p1+p2;
+    return max(p1, p2);
 }
 
 signed main(){_
+
+    int n;
+    cin >> n;
+
+    int d;
+    cin >> d;
+
+    for(int i = 1; i <=n; i++) {
+        a[i] = 0;
+    }
+
+    build(1, 1, 512345);
+
+    int resp = 0;
+    for(int i = 1; i <=n; i++) {
+
+        int num;
+        cin >> num;
+        a[i] = num;
+
+        int l = max(1LL, num - d);
+        int r = min(500000LL, num + d);
+
+        int x = query(1, 1, 500000LL, l, r);
+        resp = max(resp, x + 1);
+
+        update(1, 1, 500000LL, num, x + 1);
+    }   
+
+    cout << resp << endl;
+
 
     return 0;
 }
