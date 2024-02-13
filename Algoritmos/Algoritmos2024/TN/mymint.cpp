@@ -36,6 +36,11 @@ int power(int a, int b) {
 int modinv(int x) {
     return power(x, MODN-2);
 }
+int mdc(int a, int b) {
+    if (a < b) swap(a,b);
+    else if (b == 0) return a;
+    return mdc(b, a%b);
+}
 
 signed main(){_
 
