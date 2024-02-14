@@ -20,27 +20,29 @@
 
 using namespace std;
 
+map<int, int> f;
+vector<int> v;
+
 signed main(){_
 
-    int t;
-    cin >> t;
+    int r, g, b;
+    cin >> r >> g >> b;
 
-    while(t--) {
-        int n;
-        cin >> n;
-
-        int soma = 1;
-        int cur = 3;
-
-        for(int i = 1; i <=n; i++) {
-            cout << cur << ' ';
-            cur+=soma;
-            if (soma == 1) soma = 2;
-            else soma = 1;
-        }
-        cout << endl;
+    int resp = 0;
+    v.pb(g);
+    v.pb(r);
+    v.pb(b);
+    sort(v.rbegin(), v.rend());
+    while(v[1] != 0 and v[0] > 1){
+        v[0]-=2;
+        v[1]-=1;
+        resp++;
+        sort(v.rbegin(), v.rend());
     }
 
+    resp += v[2];
+
+    cout << resp << endl;
 
     return 0;
 }
