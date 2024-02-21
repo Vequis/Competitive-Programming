@@ -18,23 +18,45 @@
 #define MODN 1000000007
 #define int long long // -> solução divina
 
+#define maxf
+
 using namespace std;
 
-//ax + by = g = mdc(a,b)
+int fat[maxf];
+
+int sum(int a, int b) { return (a+b)%MODN; }
+int mult(int a, int b) { return ( a % MODN * (b % MODN))%MODN; }
+int power(int a, int b) {
+    int resp = 1;
+    int pot = a;
+    while(b > 0) {
+        if (b & 1) resp = mult(resp, pot);
+        pot = mult(pot, pot);
+        b/=2;
+    }
+    return resp;
+}
+//So funciona se MODN for primo
+int modinv(int x) {
+    return power(x, MODN-2);
+}
+int mdc(int a, int b) {
+    if (a < b) swap(a,b);
+    else if (b == 0) return a;
+    return mdc(b, a%b);
+}
 int gcd_extended(int a, int b, int& x, int& y) {
-    if (a < b) return gcd_extended(b, a, y, x);
-    if (b==0) {
+    if (b == 0) {
         x = 1;
         y = 0;
         return a;
     }
     int x1, y1;
-    int d = gcd_extended(b, a%b, x1, y1);
+    int d = gcd_extended(b, a % b, x1, y1);
     x = y1;
-    y = x1 - y1*(a/b);
+    y = x1 - y1 * (a / b);
     return d;
 }
-
 bool find_any_solution(int a, int b, int c, int &x0, int &y0, int &g) { // equação diofantina linear
     g = gcd_extended(abs(a), abs(b), x0, y0);
     if (c % g) {
@@ -47,19 +69,6 @@ bool find_any_solution(int a, int b, int c, int &x0, int &y0, int &g) { // equa�
     if (b < 0) y0 = -y0;
     return true;
 }
-
-int modinv(int a, int m) {
-    int x, y;
-    int g = gcd_extended(a, m, x, y);
-    if (g != 1) {
-        return -1;
-    }
-    else {
-        x = (x % m + m) % m;
-        return x;
-    }
-}
-
 int inv(int a) {
     int m = MODN;
     return a <= 1 ? a : m - (long long)(m/a) * inv(m % a) % m;
@@ -89,14 +98,17 @@ vi inverting_all(const vi &a, int m) { // pega um vetor e inverte todos os numer
     return b;
 }
 
+void fatorial(int n) { //precalcula fatorial
+    fat[0] = 1;
+    for(int i = 1; i <=n; i++) fat[i] = mult(fat[i-1], i);
+    // incluir aquela funcao para calcular modinv de todos os fat em O(n)
+}
+int nCr(int n, int k) { // combinação n a k
+    return mult(fat[n], mult(modinv(fat[n-k]), modinv(fat[k])));
+    // return fat[n] % MODN * modinv(fat[n-k]) % MODN * modinv(fat[k]) % MODN;
+}
+
 signed main(){_
-
-    int x, y;
-    // cin >> x >> y;
-
-    cout << gcd_extended(355, 269, x, y) << endl;
-    // cout << x << ' ' << y << endl;
-    // 
 
     return 0;
 }

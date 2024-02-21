@@ -18,6 +18,7 @@
 #define MODN 998244353
 #define int long long // -> solução divina
 
+using namespace std;
 
 int power(int a, int b) {
     int resp = 1;
@@ -31,13 +32,9 @@ int power(int a, int b) {
 
     return resp;
 }
-
 int modinv(int n) {
     return power(n, MODN-2);
 }
-
-using namespace std;
-
 int gcd(int a, int b, int& x, int& y) {
     if (b == 0) {
         x = 1;
