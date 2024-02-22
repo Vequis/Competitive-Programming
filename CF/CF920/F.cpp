@@ -23,8 +23,10 @@ using namespace std;
 //dei uma roubadinha olhando o editorial
 //pensar que o que multiplica é
 //(i - l + 1)
-int psa[112345];
-int pasa[112345];
+int psa[112345][333];
+int pasa[112345][333];
+
+int a[112345];
 
 signed main(){_
 
@@ -33,25 +35,50 @@ signed main(){_
 
     while(t--) {
 
-        psa[0] = 0;
-        pasa[0] = 0;
-
         int n;
         cin >> n;
 
         int q;
         cin >> q;
 
-        for(int i = 1; i <=n; i++) {
-            int a;
-            cin >> a;
-            psa[a] = psa[a-1] + a;
-            pasa[a] = psa[a-1] + a*i;
+        for(int i = 1; i <=n; i++) cin >> a[i];
+
+        for (int d = 1; d<=320; d++) {
+            for(int i = 1; i <= d; i++) {
+                psa[i][d] = a[i];
+                pasa[i][d] = a[i];
+            }
+
+            for(int i = d+1; i <=n; i++) {
+                psa[i][d] = psa[i-d][d] + a[i];
+                pasa[i][d] = pasa[i-d][d] + a[i]*((i-1)/d + 1);
+            }
         }
 
         while(q--) {
-            
+            int s, d, k;
+            cin >> s >> d >> k;
+            if (d <= 320) {
+                
+                int resp = pasa[s + d*(k-1)][d];
+                if (s - d > 0) {
+                    resp -= pasa[s - d][d];
+                    resp -= (psa[s + d*(k-1)][d] - psa[s - d][d]) * ((s-1)/d);
+                }
+
+                cout << resp << ' ';
+
+            } else {
+                int resp = 0;
+                for(int i = 1; i <=k; i++) {
+                    resp += a[s + (i-1)*d]*i;
+                }
+
+                cout << resp << ' ';
+            }
         }
+
+        cout << endl;
     }
 
     return 0;
