@@ -125,5 +125,15 @@ void crivo(int n){
 
 signed main(){_
 
+    int t;
+    cin >> t;
+
+    fatorial(1123450);
+    while(t--) {
+        int a, b;
+        cin >> a >> b;
+        cout << nCr(a, b) << endl;
+    }
+
     return 0;
 }
