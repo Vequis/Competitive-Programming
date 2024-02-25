@@ -18,10 +18,9 @@
 #define MODN 1000000007
 #define int long long // -> solução divina
 
-#define maxf 112345
-
 using namespace std;
 
+#define maxf 112345
 int fat[maxf];
 
 int sum(int a, int b) { return (a+b)%MODN; }
@@ -110,7 +109,7 @@ int nCr(int n, int k) { // combinação n a k
 }
 
 vi primos;
-int visitadoscrivo[112345];
+int visitadoscrivo[412345];
 void crivo(int n){
     primos.pb(2);
     for(int i=3; i<=n; i+=2){
@@ -121,7 +120,56 @@ void crivo(int n){
     }
 }
 
-signed main(){_
+map<int, int> f;
+void solve() {
+    int n, k;
+    cin >> n >> k;
+
+    int cont1 = 0;
+    for(int i = 0; i < n; i++) {
+        int a;
+        cin >> a;
+        cont1 += (a==1);
+        int div = 0;
+
+        for (int j = 0; j < sz(primos) and a > 1; j++) {
+            int cur = 0;
+            while(a%primos[j] == 0) {
+                a/=primos[j];
+                cur++;
+            }
+            // cout << primos[j] << ' ' << cur << ' ' << div << endl;
+            // cout << primos[j] << ' ' << cur << ' ' << mdc(div, cur) << endl;
+            div = mdc(div, cur);
+        }
+        if (a > 1) div = mdc(1, div);
+
+        for (int i = 1; i*i<=div; i++) {
+            if (div%i == 0) f[i]++;
+            if (i*i != div) f[div/i]++;
+        }
+    }
+
+    while(k--) {
+        int a;
+        cin >> a;
+        cout << f[a] + cont1 << endl;
+    }
+
+
+}
+
+signed main(){
+    int t;
+    // cin >> t;
+    t=1;
+
+    crivo(412340);
+    // cout << sz(primos) << endl;
+
+    while(t--) {
+        solve();
+    }
 
     return 0;
 }

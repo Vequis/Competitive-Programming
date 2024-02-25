@@ -20,20 +20,30 @@
 
 using namespace std;
 
-vi primos;
-int visitados[112345];
 
-void crivo(int n){
-    primos.pb(2);
-    for(int i=3; i<=n; i+=2){
-        if(!visitados[i]){
-            primos.pb(i);
-            for(int j=i*i; j<=n; j+=i) visitados[j] = 1;
-        }
+void solve() {
+    string s;
+    cin >> s;
+
+    map<char, int> f;
+
+    for(int c : s) f[c]++;
+
+    char g;
+    for(ii p : f) {
+        if (p.sc == 1) g = p.fs;
     }
+
+    for(int i = 0; i < sz(s); i++) if (s[i] == g) cout << i+1 << endl;
 }
 
 signed main(){_
+    int t;
+    // cin >> t;
+    t=1;
+    while(t--) {
+        solve();
+    }
 
     return 0;
 }
