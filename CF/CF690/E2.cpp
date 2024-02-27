@@ -108,23 +108,61 @@ void fatorial(int n) { //precalcula fatorial
 }
 int nCr(int n, int k) { // combinação n a k
     // return mult(fat[n], mult(modinv(fat[n-k]), modinv(fat[k])));
-    // VERIFICAR SE INICIOU FATORIAL
     return fat[n] % MODN * fatinv[n-k] % MODN * fatinv[k] % MODN;
 }
 
-vi primos;
-int visitadoscrivo[112345];
-void crivo(int n){
-    primos.pb(2);
-    for(int i=3; i<=n; i+=2){
-        if(!visitadoscrivo[i]){
-            primos.pb(i);
-            for(int j=i*i; j<=n; j+=i) visitadoscrivo[j] = 1;
-        }
+vi v;
+
+int bb(int l, int r, int x) {
+    int ini = l, fim = r;
+    int mid;
+    while(ini < fim) {
+        mid = ini + (fim - ini) / 2;
+        if (v[mid] > x) fim = mid;
+        else ini = mid + 1;
     }
+    return ini;
+}
+
+void solve() {
+    v.clear();
+    int n, m, k;
+    cin >> n >> m >> k;
+    for (int i = 0; i < n; i++) {
+        int a;
+        cin >> a;
+        v.pb(a);
+    }
+
+    sort(all(v));
+
+    int resp = 0;
+    for(int i = 0; i < n; i++) {
+        int qtd = bb(i, n, v[i] + k) - i - 1;
+        // cout << v[i] << ' ' << qtd << endl;
+        if (qtd < m-1) continue;
+        // cout << nCr(qtd, m-1) << endl;
+        resp = sum(resp, nCr(qtd, m-1));
+    }
+
+    cout << resp << endl;
+    // cout << bb(0, n, 0) << endl;
+    // cout << bb(0, n, 1) << endl;
+    // cout << bb(0, n, 2) << endl;
+    // cout << bb(0, n, 3) << endl;
+    // cout << bb(0, n, 5) << endl;
 }
 
 signed main(){_
+    int t;
+    cin >> t;
+    // t=1;
+
+    fatorial(1123450);
+
+    while(t--) {
+        solve();
+    }
 
     return 0;
 }

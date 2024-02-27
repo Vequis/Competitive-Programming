@@ -15,12 +15,13 @@
 #define MAXX 1073741823
 #define MAX (1<<20)
 #define INF 0x3f3f3f3f
-#define MODN 1000000007
 #define int long long // -> solução divina
+// #define MODN 1000000007
 
 #define maxf 1123456
 
 using namespace std;
+int MODN = -1;
 
 int fat[maxf];
 int fatinv[maxf];
@@ -108,7 +109,6 @@ void fatorial(int n) { //precalcula fatorial
 }
 int nCr(int n, int k) { // combinação n a k
     // return mult(fat[n], mult(modinv(fat[n-k]), modinv(fat[k])));
-    // VERIFICAR SE INICIOU FATORIAL
     return fat[n] % MODN * fatinv[n-k] % MODN * fatinv[k] % MODN;
 }
 
@@ -124,7 +124,23 @@ void crivo(int n){
     }
 }
 
+int dp[1123456];
 signed main(){_
+
+    int n, m;
+    cin >> n >> m;
+    MODN = m;
+
+    dp[0] = 0;
+    dp[1] = 0;
+    dp[2] = 1;
+
+    for(int i = 3; i <=n; i++) {
+        dp[i] = (MODN + i - 1) % MODN * (sum(dp[i-1], dp[i-2])) % MODN;
+    }
+
+    for(int i = 1; i <=n; i++) cout << dp[i] << ' ';
+    cout << endl;
 
     return 0;
 }

@@ -18,7 +18,7 @@
 #define MODN 1000000007
 #define int long long // -> solução divina
 
-#define maxf 1123456
+#define maxf 2123456
 
 using namespace std;
 
@@ -108,7 +108,6 @@ void fatorial(int n) { //precalcula fatorial
 }
 int nCr(int n, int k) { // combinação n a k
     // return mult(fat[n], mult(modinv(fat[n-k]), modinv(fat[k])));
-    // VERIFICAR SE INICIOU FATORIAL
     return fat[n] % MODN * fatinv[n-k] % MODN * fatinv[k] % MODN;
 }
 
@@ -125,6 +124,12 @@ void crivo(int n){
 }
 
 signed main(){_
+
+    fatorial(2123450);
+
+    int n, m;
+    cin >> n >> m;
+    cout << nCr(m+n-1, m) << endl;
 
     return 0;
 }

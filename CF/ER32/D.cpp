@@ -108,8 +108,7 @@ void fatorial(int n) { //precalcula fatorial
 }
 int nCr(int n, int k) { // combinação n a k
     // return mult(fat[n], mult(modinv(fat[n-k]), modinv(fat[k])));
-    // VERIFICAR SE INICIOU FATORIAL
-    return fat[n] % MODN * fatinv[n-k] % MODN * fatinv[k] % MODN;
+    return fat[n] * fatinv[n-k] * fatinv[k];
 }
 
 vi primos;
@@ -124,7 +123,30 @@ void crivo(int n){
     }
 }
 
+int permcaot[112345];
 signed main(){_
+
+    int n, k;
+    cin >> n >> k;
+
+    fatorial(1123450);
+    permcaot[0] = 1;
+    permcaot[1] = 0;
+    permcaot[2] = 1;
+
+    for(int i = 3; i<=6; i++) {
+        permcaot[i] = (i - 1) * (permcaot[i-1] + permcaot[i-2]);
+    }
+
+    int resp = 0;
+    for(int i = n-k; i<=n; i++) {
+        int cur = 1;
+        for (int j = n; j>=i + 1; j--) cur *= j;
+        for (int j = 1; j<=n-i; j++) cur/=j;
+        resp += cur * permcaot[n-i];
+    }
+
+    cout << resp << endl;
 
     return 0;
 }
