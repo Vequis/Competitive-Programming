@@ -108,6 +108,7 @@ void fatorial(int n) { //precalcula fatorial
 }
 int nCr(int n, int k) { // combinação n a k
     // return mult(fat[n], mult(modinv(fat[n-k]), modinv(fat[k])));
+    // VERIFICAR SE INICIOU FATORIAL
     return fat[n] % MODN * fatinv[n-k] % MODN * fatinv[k] % MODN;
 }
 
@@ -123,32 +124,13 @@ void crivo(int n){
     }
 }
 
-int p[1123456];
+signed main(){_
 
-int n;
+    int n;
+    cin >> n;
 
-int solve1() {
-    // int n;
-    // cin >> n;
+    fatorial(2123450);
 
-    int soma = 0;
-    p[1] = 0;
-    p[2] = 2;
-    for(int i = 3; i<=n; i++) p[i] = (2*p[i-1] + 1)%MODN;
-
-
-    int resp = (power(2, 2*n) + power(2, 2*n - 1) - 1) % MODN;
-    for (int i = 1; i<=n; i++) {
-        soma = sum(soma, p[i]);
-        int cur = nCr(2*n - i - 1, n - 1) * soma % MODN;
-        // cout << i << ' ' << soma << ' ' << cur << endl;
-        resp = (2*MODN + resp - (2 * cur)%MODN) % MODN;
-    }
-
-    return resp;
-}
-
-int solve2() {
     int resp = power(2, n + 1) - 1;
     int cur = power(2, n);
     for (int i = n+1; i <=2*n; i++) {
@@ -157,23 +139,7 @@ int solve2() {
         resp = sum(resp, cur);
     }
 
-    return resp;
-}
+    cout << resp << endl;
 
-signed main(){_
-
-    fatorial(2123450);
-    cin >> n;
-    cout << solve1() << endl;
-
-    // for (int i = 30; i <= 50; i++) {
-    //     cout << i << endl;
-    //     n=i;
-    //     cout << solve1() << endl;
-    //     cout << solve2() << endl;
-    //     if (solve1() != solve2()) cout << i << endl;
-    //     // cout << endl;
-    // }
-    
     return 0;
 }
