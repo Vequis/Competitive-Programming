@@ -20,41 +20,81 @@
 
 using namespace std;
 
+int mdc(int a, int b){
+    if (b > a) swap(a, b);
+    if (b==0)return a;
+    return mdc(b, a%b);
+}
 
+int mmc(int a, int b) {
+    return a*b/mdc(a, b);
+}
 
-signed main(){_
-
+void solve() {
     int n;
     cin >> n;
+    vi v;
+    map<int, int> f;
+    map<int, int> pr;
 
-    int atual = 1;
-    
-    vi v(n+1);
+    for (int i = 0; i < n; i++) {
+        int x;
+        cin >> x;
+        v.pb(x);
+    }
 
-    for(int i = 0; i < n; i++) {
-        int a;
-        cin >> a;
-        v[i] = a;
+    sort(all(v));
 
-        if (a==0) {
-            cout << 0 << endl;
-            return 0;
+    for (int i = 0; i < n; i++) {
+        int x = v[i];
+
+        // cout << endl;
+        map<int, int> newf = f;
+        for (ii p : f) {
+
+            // x : elemento do f -> p.fs
+            // f[x] -> maior numero de elementos que possu usar para formar x -> p.sc
+            //
+            // cout << p.fs << ' ' << p.sc << endl;
+            newf[mmc(x, p.fs)] = p.sc + 1;
+        }
+
+        f = newf;
+
+        if (f[x] == 0) f[x] = 1;
+        pr[x] = 1;
+
+        // a - {a}
+        // b - {a, b, ab}
+        // c - {a, b, c, ab, bc, ac, abc}
+        // d - x + x + 1
+
+        // cout << endl;
+        // cout << "DEBUG: " << v[i] << endl;
+        // for(ii p : f) {
+        //     cout << p.fs << ' ' << p.sc << endl;
+        // }
+    }
+
+    int resp = 0;
+    for (ii p : f) {
+        // cout << p.fs << ' ' << p.sc << endl;
+        if (pr[p.fs] == 0) {
+            resp = max(resp, p.sc);
         }
     }
 
-    for(int i = 0; i < n; i++) {
-        if ((10e17)/atual < v[i]) {
-            cout << -1 << endl;
-            return 0;
-        }
+    cout << resp << endl;
+}
 
-        cout << atual << endl;
+signed main(){_
+    int t;
+    cin >> t;
+    // t=1;
 
-        atual*=v[i];
+    while(t--) {
+        solve();
     }
-
-    // cout << 10e18 << endl;
-    cout << atual << endl;
 
     return 0;
 }
