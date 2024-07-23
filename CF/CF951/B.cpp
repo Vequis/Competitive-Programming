@@ -20,24 +20,21 @@
 
 using namespace std;
 
-vi v;
-
-bool verifica(int p) {
-    int ct = 0;
-    for (int i = 0; i < p; i++) ct+=v[i];
-}
-
-int bb(int x) {
-
-}
-
 void solve() {
+    int x, y;
+    cin >> x >> y;
+    int resp = 1;
 
+    while ((resp & x) == (resp & y)) {
+        resp = resp << 1;
+    }
+    cout << resp << endl;
 }
 
 signed main(){_
     int t;
     cin >> t;
+    // t=1;
 
     while(t--) {
         solve();

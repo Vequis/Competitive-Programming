@@ -20,24 +20,52 @@
 
 using namespace std;
 
-vi v;
-
-bool verifica(int p) {
-    int ct = 0;
-    for (int i = 0; i < p; i++) ct+=v[i];
+int mdc(int a, int b) {
+    if (a < b) swap(a, b);
+    if (b == 0) return a;
+    return mdc(b, a%b);
 }
 
-int bb(int x) {
-
+int mmc(int a, int b) {
+    return a*b/mdc(a, b);
 }
+
+int v[52];
 
 void solve() {
+    int n;
+    cin >> n;
+
+    int m = 1;
+    for (int i = 0; i < n; i++) {
+        int x;
+        cin >> x;
+        v[i] = x;
+        m = mmc(m, x);
+    }
+
+    int soma = 0;
+    int a = m-1;
+    for (int i = 0; i < n; i++) {
+        soma += (a/v[i]) + 1;
+    }
+    if (soma > a) {
+        cout << -1 << endl;
+        return;
+    }
+
+    for (int i = 0; i < n; i++) {
+        cout << a/v[i] + 1 << ' ';
+        soma -= (a/v[i]) + 1;
+    }
+    cout << endl;
 
 }
 
 signed main(){_
     int t;
     cin >> t;
+    // t=1;
 
     while(t--) {
         solve();
