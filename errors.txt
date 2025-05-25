@@ -1,0 +1,6 @@
+Esse é pra anotar erros que fiz em programas
+
+- DP
+    - Esquecer condições de base
+- flag pra return
+    - if (flag) return

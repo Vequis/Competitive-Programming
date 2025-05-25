@@ -60,10 +60,9 @@ int gcd_extended(int a, int b, int& x, int& y) {
 }
 bool find_any_solution(int a, int b, int c, int &x0, int &y0, int &g) { // equação diofantina linear
     // ax0 + by0 = c
-    // g eh o mdc entre a,b
+    // g eh o mdc entra a,b
     // qualquer outra solução é x = x0 + t * b/g
     // y = y0 - t * a/g
-    // https://codeforces.com/problemset/problem/7/C
     g = gcd_extended(abs(a), abs(b), x0, y0);
     if (c % g) {
         return false;
@@ -131,6 +130,21 @@ void crivo(int n){ // Pegar todos os primos até n
 }
 
 signed main(){_
+
+    // https://codeforces.com/problemset/problem/7/C
+
+    int a, b, c;
+    cin >> a >> b>> c;
+
+    int x, y, g;
+
+    bool result = find_any_solution(a, b, -c, x, y, g);
+
+    if (result) {
+        cout << x << ' ' << y << endl;
+    } else {
+        cout << -1 << endl;
+    }
 
     return 0;
 }
