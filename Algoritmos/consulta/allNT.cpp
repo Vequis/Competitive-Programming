@@ -60,7 +60,7 @@ int gcd_extended(int a, int b, int& x, int& y) {
 }
 bool find_any_solution(int a, int b, int c, int &x0, int &y0, int &g) { // equação diofantina linear
     // ax0 + by0 = c
-    // g eh o mdc entre a,b
+        // g eh o mdc entre a,b
     // qualquer outra solução é x = x0 + t * b/g
     // y = y0 - t * a/g
     // https://codeforces.com/problemset/problem/7/C
