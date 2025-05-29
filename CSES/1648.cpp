@@ -17,9 +17,9 @@
 #define INF 0x3f3f3f3f
 #define MODN 1000000007
 #define int long long // -> solução divina
-using namespace std;
+#define maxn 212345
 
-#define maxn 112345
+using namespace std;
 
 int a[maxn];
 int tree[4*maxn + 1];
@@ -41,8 +41,8 @@ void build(int node, int tl, int tr){
 
 void update(int node, int tl, int tr, int idx, int val){
     if(tl == tr){
-        a[idx] += val;
-        tree[node] += val;
+        a[idx] = val;
+        tree[node] = val;
     } else {
         int tm = tl + (tr - tl)/2;
 
@@ -69,6 +69,28 @@ int sum(int node, int tl, int tr, int l, int r){
 }
 
 signed main(){_
+    int n;
+    cin >> n;
+
+    int q;
+    cin >> q;
+
+    for (int i = 1; i <=n; i++) {
+        cin >> a[i];
+    }
+
+    build(1, 1, n);
+
+    while(q--) {
+        int op, k, b;
+        cin >> op >> k >> b;
+
+        if (op == 1) {
+            update(1, 1, n, k, b);
+        } else {
+            cout << sum(1, 1, n, k, b) << endl;
+        }
+    }
 
     return 0;
 }
