@@ -20,21 +20,37 @@
 
 using namespace std;
 
-vi primos;
-int visitados[112345];
+int fib[112];
 
-void crivo(int n){
-    primos.pb(2);
-    for(int i=3; i<=n; i+=2){
-        if(!visitados[i]){
-            primos.pb(i);
-            for(int j=i*i; j<=n; j+=i) visitados[j] = 1;
-        }
+void solve() {
+    int n, m;
+    cin >> n >> m;
+
+    string resp = "";
+    while(m--) {
+        int w, h, l;
+        cin >> w >> h >> l;
+        int maximo = max(max(w, h), l);
+        int minimo = min(min(w, h), l);
+        if (maximo >= fib[n] + fib[n-1] and minimo >= fib[n]) cout << '1';
+        else cout << '0';
     }
+    cout << endl;
+
 }
 
 signed main(){_
+    int t;
+    cin >> t;
+    // t=1;
+    fib[1] = 1;
+    fib[2] = 2;
 
-    
+    for (int i = 3; i <= 15; i++) fib[i] = fib[i-1] + fib[i-2]; 
+
+    while(t--) {
+        solve();
+    }
+
     return 0;
 }

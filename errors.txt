@@ -4,4 +4,4 @@ Esse é pra anotar erros que fiz em programas
     - Esquecer condições de base
 - flag pra return
     - if (flag) return
-- 
+- da pra fazer vetor ateh 10^7 -> 102MB

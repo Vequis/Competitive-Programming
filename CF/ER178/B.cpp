@@ -20,21 +20,36 @@
 
 using namespace std;
 
-vi primos;
-int visitados[112345];
+void solve() {
+    int n;
+    cin >> n;
 
-void crivo(int n){
-    primos.pb(2);
-    for(int i=3; i<=n; i+=2){
-        if(!visitados[i]){
-            primos.pb(i);
-            for(int j=i*i; j<=n; j+=i) visitados[j] = 1;
-        }
+    vi v(n+1);
+    vi maximo(n+1); // representa o maximo valor entre 0 e i
+
+    maximo[0] = 0;
+    for (int i = 1; i <= n; i++) {
+        cin >> v[i];
+        maximo[i] = max(maximo[i-1], v[i]);
     }
+
+    vi resp(n+1);
+    int soma = 0;
+    for (int k=1; k<=n; k++) {
+        if (k!=1) soma += v[n+2-k];
+        cout << soma + maximo[n+1 - k] << ' ';
+    }
+    cout << endl;
 }
 
 signed main(){_
+    int t;
+    cin >> t;
+    // t=1;
 
-    
+    while(t--) {
+        solve();
+    }
+
     return 0;
 }

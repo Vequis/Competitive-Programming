@@ -21,7 +21,8 @@
 using namespace std;
 
 vi primos;
-int visitados[112345];
+int visitados[11234567];
+int psaprimos[412345];
 
 void crivo(int n){
     primos.pb(2);
@@ -33,8 +34,50 @@ void crivo(int n){
     }
 }
 
-signed main(){_
+// Lembrar do caso
+// N = 1
+// 1
+vi psa;
 
-    
+void solve() {
+    int n;
+    cin >> n;
+
+    vi v(n);
+    for (int i = 0; i <n; i++) {
+        cin >> v[i];
+    }   
+
+    sort(all(v), greater<>());
+
+    psa = vi(n);
+    psa[0] = v[0];
+    for(int i =1; i<n; i++) {
+        psa[i] = psa[i-1] + v[i];
+    }
+
+    int maioresp = -1;
+
+    for (int i = 0; i < n; i++) {
+        if (psa[i] >= psaprimos[i]) maioresp = i;
+    }
+
+    cout << n - maioresp - 1 << endl;
+}
+
+signed main(){_
+    int t;
+    cin >> t;
+    // t=1;
+
+    crivo(11234560);
+    // cout << sz(primos) << endl;
+    psaprimos[0] = 2;
+    for (int i = 1; i < 412340; i++) psaprimos[i] = psaprimos[i-1] + primos[i];
+
+    while(t--) {
+        solve();
+    }
+
     return 0;
 }

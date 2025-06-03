@@ -20,21 +20,34 @@
 
 using namespace std;
 
-vi primos;
-int visitados[112345];
+void solve() {
+    int n, k;
+    cin >> n >> k;
+    string s;
+    cin >> s;
 
-void crivo(int n){
-    primos.pb(2);
-    for(int i=3; i<=n; i+=2){
-        if(!visitados[i]){
-            primos.pb(i);
-            for(int j=i*i; j<=n; j+=i) visitados[j] = 1;
-        }
-    }
+    int count0 = 0;
+    int count1 = 0;
+    for (char c : s) {
+        if (c=='1') count1++;
+        else count0++;
+    }   
+
+    int maximo = count0/2 + count1/2;
+    int minimo = (n - 2*min(count0, count1))/2;
+
+    if (minimo <= k and k <= maximo and k%2 == minimo%2) cout << "Yes" << endl;
+    else cout << "No" << endl;
 }
 
 signed main(){_
+    int t;
+    cin >> t;
+    // t=1;
 
-    
+    while(t--) {
+        solve();
+    }
+
     return 0;
 }
