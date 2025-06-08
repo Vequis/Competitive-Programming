@@ -1,9 +1,28 @@
 {
+    "version": "2.0.0",
     "tasks": [
         {
+            "label": "build C++ arquivo único",
+            "type": "shell",
+            "command": "g++",
+            "args": [
+                "-g",
+                "-Wall",
+                "-Wextra",
+                "-std=c++17",
+                "E.cpp",
+                "-o",
+                "E"
+            ],
+            "group": "build",
+            "problemMatcher": [
+                "$gcc"
+            ]
+        },
+        {
             "type": "cppbuild",
-            "label": "C/C++: gcc arquivo de build ativo",
-            "command": "/usr/bin/gcc",
+            "label": "C/C++: g++ arquivo de build ativo",
+            "command": "/usr/bin/g++",
             "args": [
                 "-fdiagnostics-color=always",
                 "-g",
@@ -23,6 +42,5 @@
             },
             "detail": "Tarefa gerada pelo Depurador."
         }
-    ],
-    "version": "2.0.0"
+    ]
 }
