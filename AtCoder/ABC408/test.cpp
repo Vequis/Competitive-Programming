@@ -19,31 +19,32 @@
 #define int long long // -> solução divina
 
 using namespace std;
+#define PI 3.14159265358979323846
 
+//https://atcoder.jp/contests/abc168/tasks/abc168_c
 void solve() {
-    int a, b, c;
-    int n;
-    cin >> n;
+    double a, b, h, m;
+    cin >> a >> b >> h >> m;
 
-    a = b = c = 0;
+    double angleh = 30 * h + (m/60) * 30.0;
+    double anglem = 6*m;
+    double delta = abs(angleh - anglem);
 
-    itn cont = 0;
-    while(c < n) {
-        int aux = a;
-        a = b;
-        b = c;
-        c = 2*aux + 1;
-        cont++;
-    }
+    delta = delta * PI/180.0;
 
-    cont+=2;
-    cout << cont << endl;
+    // cout << angleh << ' ' << anglem << ' ' << delta << ' ' << cos(delta) << endl;
+    double x = a*a + b*b - 2*a*b*cos(delta);
+    // cout << x << endl;
+    x = sqrt(x);
+
+    cout << setprecision(10);
+    cout << fixed << x << endl;
 }
 
 signed main(){_
     int t;
-    cin >> t;
-    // t=1;
+    // cin >> t;
+    t=1;
 
     while(t--) {
         solve();

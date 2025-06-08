@@ -20,56 +20,36 @@
 
 using namespace std;
 
-int mdc(int a, int b) {
-    if (a < b) swap(a, b);
-    if (b==0) return a;
-    return mdc(b, a%b);
-}
-
 void solve() {
     int n;
     cin >> n;
-
-    vi v(n);
-    int g;
-    for (int i = 0; i < n; i++) cin >> v[i];
-
-    g = v[0];
-    for (int i = 0; i < n; i++) g = mdc(g, v[i]);
-
-    int qtg = 0;
+    
+    vi v;
     for (int i = 0; i < n; i++) {
-        if (g == v[i]) qtg++;
+        int x;
+        cin >> x;
+        v.pb(x);
     }
 
-    if (qtg > 0) {
-        cout << n - qtg << endl;
-        return;
+    sort(all(v));
+
+    int resp = 0;
+    int maiores = 0;
+    for (int i = n-1; i>=0; i--) {
+        if (maiores >= v[i]) {
+            cout << maiores << endl;
+            return;
+        }
+        maiores++;
     }
 
-    cout << n + 1 << endl;
-
-    // for (int i = 0; i < n; i++) {
-    //     for (int j = 0; j < n; j++) {
-    //         if (j==i) continue;
-    //         int h = mdc(v[i], v[j]);
-
-    //         if (h == g) {
-                
-    //         }
-    //     }
-    // }
-
-
-
-
-
+    cout << maiores << endl;
 }
 
 signed main(){_
     int t;
-    cin >> t;
-    // t=1;
+    // cin >> t;
+    t=1;
 
     while(t--) {
         solve();

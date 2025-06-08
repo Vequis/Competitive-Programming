@@ -20,79 +20,61 @@
 
 using namespace std;
 
-// 36 1  6 -> 2
-// 
-
-// numero minimo de formas de fazer 
-// n multiplicando numeros menores que k
-
-// em x operações, consegue fazer no maximo k^x
-// da pra fazer todos os numeros menoers que k^x
-// com no max x operacoes????
-// se tiver fator primo maior que k: nao
-// só tem fatores primos menores que k
-
-// k = 3, 2 operações -> mas nao consegue chegar em 8
-// caso
-// 1 8 3 
-
-vi primos;
-int visitados[1123456];
-
+int k;
+int n;
 
 int memo[1123456];
-int k;
-// int dp(int n) {
-//     if (n <= k) return 1;
 
-//     if (memo[n] != -1) return memo[n];
+int dp(int x) {
+    if (x<=k) return 1;
+    if (memo[x] != -1) return memo[x];
 
-//     int resp = INF;
-//     for (int i = 2; i <=k; i++) {
-//         if (n%i == 0) {
-//             int cur = dp(n/i);
-//             resp = min(resp, cur + 1);
-//         }
-//     }
-//     return memo[n] = resp;
-// }
 
-void crivo(int n){
-    primos.pb(2);
-    visitados[2] = 2;
-    for(int i=3; i<=n; i++){
-        if (i%2 == 0) {
-            visitados[i] = 2;
-            continue;
-        }
-        if(!visitados[i]){
-            visitados[i] = i;
-            primos.pb(i);
-            for(int j=i*i; j<=n; j+=i) visitados[j] = i;
+    int resp = INF;
+    for (int i = 2; i*i<=x and i <= k; i++) {
+        if (x%i == 0) {
+            if (i<=k) resp = min(resp, 1 + dp(x/i));
+            if (x/i<=k) resp = min(resp, 1 + dp(i));
         }
     }
+
+    // cout << x << ' ' << resp << endl;
+    return memo[x] = resp;
 }
 
+int mdc(int a, int b) {
+    if (a < b) swap(a, b);
+    if (b==0) return a;
+    return mdc(b, a%b);
+}
 
 void solve() {
-    int x, y, k;
-    cin >> x >> y >> k;
+    // testar se precisa passar por todos os divisores, ou se só o maior ja basta   
 
+    int a, b;
+    cin >> a >> b >> k;
 
-    int ptr = x;
-    while(ptr!=1) {
-        cout << visitados[ptr] << endl;
-        ptr /= visitados[ptr];
+    int g = mdc(a, b);
+
+    for (int i = 1; i <=max(a/g, b/g); i++) memo[i] = -1;
+
+    int x = dp(a/g);
+    int y = dp(b/g);
+
+    if (a/g==1) x=0;
+    if (b/g==1) y=0;
+
+    if (x == INF or y == INF) {
+        cout << -1 << endl;
+    } else {
+        cout << x + y << endl;
     }
-    cout << endl;
 }
 
 signed main(){_
     int t;
     cin >> t;
     // t=1;
-
-    crivo(1123450);
 
     while(t--) {
         solve();

@@ -5,3 +5,8 @@ Esse é pra anotar erros que fiz em programas
 - flag pra return
     - if (flag) return
 - da pra fazer vetor ateh 10^7 -> 102MB
+- usar memset pra memo, qdo da pra limpar de 1 a n
+- esquecer que o num de divisores eh O(n^1/3);
+- overflow em mult de ll (na busca binaria)
+- Para n pequeno, pode valer a pena fazer analise 2 a 2 e dps ir para todos
+- ver se eh quadrado perfeito com llround(sqrt(x))

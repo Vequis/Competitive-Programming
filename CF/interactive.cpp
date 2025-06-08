@@ -21,29 +21,29 @@
 using namespace std;
 
 void solve() {
-    int a, b, c;
-    int n;
-    cin >> n;
+    int l = 1, r = 1000001, md;
 
-    a = b = c = 0;
+    while(l != r) {
+        md = l + (r - l)/2;
+        cout << md << endl;
+        cout << flush;
 
-    itn cont = 0;
-    while(c < n) {
-        int aux = a;
-        a = b;
-        b = c;
-        c = 2*aux + 1;
-        cont++;
+        string resp;
+        cin >> resp;
+        if (resp == "<") {
+            r = md;
+        } else {
+            l = md + 1;
+        }
     }
-
-    cont+=2;
-    cout << cont << endl;
+    cout << '!' << ' ' << l-1 << endl;
+    cout << flush;  
 }
 
 signed main(){_
     int t;
-    cin >> t;
-    // t=1;
+    // cin >> t;
+    t=1;
 
     while(t--) {
         solve();

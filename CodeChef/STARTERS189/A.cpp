@@ -21,23 +21,17 @@
 using namespace std;
 
 void solve() {
-    int a, b, c;
-    int n;
-    cin >> n;
-
-    a = b = c = 0;
-
-    itn cont = 0;
-    while(c < n) {
-        int aux = a;
-        a = b;
-        b = c;
-        c = 2*aux + 1;
-        cont++;
+    int n, a, b, c, d;
+    cin >> n >> a >> b >> c >> d;
+    
+    int resp = -1;
+    for (int p = 0; p<=n; p++) {
+        // p e o numero de 1s
+        int cur = p*b + (n-p)*a + p*(n-p)*max(c, d);
+        resp = max(resp, cur);
     }
 
-    cont+=2;
-    cout << cont << endl;
+    cout << resp << endl;
 }
 
 signed main(){_

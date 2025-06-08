@@ -20,50 +20,20 @@
 
 using namespace std;
 
-int mdc(int a, int b) {
-    if (a < b) swap(a, b);
-    if (b==0) return a;
-    return mdc(b, a%b);
-}
-
 void solve() {
     int n;
     cin >> n;
-
-    vi v(n);
-    int g;
-    for (int i = 0; i < n; i++) cin >> v[i];
-
-    g = v[0];
-    for (int i = 0; i < n; i++) g = mdc(g, v[i]);
-
-    int qtg = 0;
-    for (int i = 0; i < n; i++) {
-        if (g == v[i]) qtg++;
+    
+    cout << 2 << ' '<<1 << ' ';
+    for (int i = 5; i<=n; i+=2) {
+        cout << i << ' ' << i-1 << ' ';
     }
-
-    if (qtg > 0) {
-        cout << n - qtg << endl;
+    if (n==2) {
+        cout << endl; 
         return;
     }
-
-    cout << n + 1 << endl;
-
-    // for (int i = 0; i < n; i++) {
-    //     for (int j = 0; j < n; j++) {
-    //         if (j==i) continue;
-    //         int h = mdc(v[i], v[j]);
-
-    //         if (h == g) {
-                
-    //         }
-    //     }
-    // }
-
-
-
-
-
+    if (n%2==0) cout << n << ' ';
+    cout << 3 << endl;
 }
 
 signed main(){_

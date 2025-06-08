@@ -20,50 +20,31 @@
 
 using namespace std;
 
-int mdc(int a, int b) {
-    if (a < b) swap(a, b);
-    if (b==0) return a;
-    return mdc(b, a%b);
-}
-
 void solve() {
     int n;
     cin >> n;
+    
+    string s;
+    cin >> s;
 
-    vi v(n);
-    int g;
-    for (int i = 0; i < n; i++) cin >> v[i];
-
-    g = v[0];
-    for (int i = 0; i < n; i++) g = mdc(g, v[i]);
-
-    int qtg = 0;
     for (int i = 0; i < n; i++) {
-        if (g == v[i]) qtg++;
+
+        if (i+1 < n and s[i] > s[i+1]) {
+            int idxmenor = i+1; // primeiro indice onde s[i] <= s[idx]
+            while(idxmenor < n and s[i] >= s[idxmenor]) {
+                idxmenor++;
+            }
+
+            for (int j = i+1; j<idxmenor; j++) cout << s[j];
+            cout << s[i];
+            for (int j = idxmenor; j<n; j++) cout << s[j];
+            cout << endl;
+            return;
+        } else {
+            cout << s[i];
+        }
     }
-
-    if (qtg > 0) {
-        cout << n - qtg << endl;
-        return;
-    }
-
-    cout << n + 1 << endl;
-
-    // for (int i = 0; i < n; i++) {
-    //     for (int j = 0; j < n; j++) {
-    //         if (j==i) continue;
-    //         int h = mdc(v[i], v[j]);
-
-    //         if (h == g) {
-                
-    //         }
-    //     }
-    // }
-
-
-
-
-
+    cout << endl;
 }
 
 signed main(){_

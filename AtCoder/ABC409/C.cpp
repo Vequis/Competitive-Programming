@@ -21,29 +21,42 @@
 using namespace std;
 
 void solve() {
-    int a, b, c;
-    int n;
-    cin >> n;
+    int n, l;
+    cin >> n >> l;
+    
+    map<int, int> f;
 
-    a = b = c = 0;
-
-    itn cont = 0;
-    while(c < n) {
-        int aux = a;
-        a = b;
-        b = c;
-        c = 2*aux + 1;
-        cont++;
+    if (l%3) {
+        cout << 0 << endl;
+        return; 
     }
 
-    cont+=2;
-    cout << cont << endl;
+    int pos_atual = 0;
+    f[pos_atual]++;
+    for (int i = 0; i < n-1; i++) {
+        int x;
+        cin >> x;
+
+        pos_atual += x;
+
+        pos_atual%=l;
+        f[pos_atual]++;
+
+        // cout << pos_atual << endl;
+    }
+
+    int resp = 0;
+    for (int i = 0; i < l/3; i++) {
+        int cur = f[i] * f[i+ l/3] * f[i + 2*l/3];
+        resp += cur;
+    }
+    cout << resp << endl;
 }
 
 signed main(){_
     int t;
-    cin >> t;
-    // t=1;
+    // cin >> t;
+    t=1;
 
     while(t--) {
         solve();
