@@ -21,6 +21,7 @@
 using namespace std;
 
 // fazer mais casos
+// Algum dia da minha vida eu vou comentar isso
 
 // O(N log N)
 vector<int> compress(const vector<int>& a) {
