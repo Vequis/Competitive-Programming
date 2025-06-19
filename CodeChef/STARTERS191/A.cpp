@@ -20,33 +20,24 @@
 
 using namespace std;
 
-// O(N log N)
-vector<int> compress(const vector<int>& a) {
-    vi sorted = a;
-    sort(all(sorted));
-    sorted.erase(unique(all(sorted)), sorted.end());
-
-    vi compressed;
-    for (int val : a) {
-        int idx = lower_bound(all(sorted), val) - sorted.begin();
-        compressed.pb(idx);
+void solve() {
+    int x, y, z;
+    cin >> x >> y >> z;
+    
+    if (z < x-1) {
+        cout << "No" << endl;
+        return;
     }
 
-    return compressed;
-}
+    if (z < x and y != 0) {
+        cout << "No" << endl;
+        return;
+    }
 
-void solve() {
-    
+    cout << "Yes" << endl;
 }
 
 signed main(){_
-    // vi original = {100, 500, 100, 2000, 500};
-    // vi compressed = compress(original);
-    
-    // for (int x : compressed) {
-    //     cout << x << ' ';
-    // }
-    // cout << endl;
     int t;
     cin >> t;
     // t=1;

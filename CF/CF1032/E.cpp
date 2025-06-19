@@ -20,33 +20,33 @@
 
 using namespace std;
 
-// O(N log N)
-vector<int> compress(const vector<int>& a) {
-    vi sorted = a;
-    sort(all(sorted));
-    sorted.erase(unique(all(sorted)), sorted.end());
+int dez_elevado(int n) {
+    if (n==0) return 1;
+    int resp = 1;
+    for (int i = 0; i < n; i++) {resp*=10;}
+    return resp;
+}
 
-    vi compressed;
-    for (int val : a) {
-        int idx = lower_bound(all(sorted), val) - sorted.begin();
-        compressed.pb(idx);
-    }
+int f(int a, int b, int n) {
+    if (n < 0) return 0;
+    int pot = dez_elevado(n);
+    int c = a/pot;
+    int d = b/pot;
 
-    return compressed;
+    if (d >= c + 2) return 0;
+    else if (c == 0 and d == 0) return f(a, b, n-1);
+    else if (c != 0 and d == c) return 2 + f(a, b, n-1);
+    else return 1 + f(a, b, n-1);
 }
 
 void solve() {
-    
+    int l, r;
+    cin >> l >> r;
+
+    cout << f(l, r, 10) << endl;
 }
 
 signed main(){_
-    // vi original = {100, 500, 100, 2000, 500};
-    // vi compressed = compress(original);
-    
-    // for (int x : compressed) {
-    //     cout << x << ' ';
-    // }
-    // cout << endl;
     int t;
     cin >> t;
     // t=1;
