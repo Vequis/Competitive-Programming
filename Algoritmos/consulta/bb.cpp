@@ -23,6 +23,22 @@ using namespace std;
 
 vi v;
 
+// Often used in "find k-th number"
+// bs in answer is a very often method as well
+
+//Implementation
+// Always think in a problem as 
+// 0000111111
+// Find first '1', first "YES"
+// You want to keep 1s in your set -> fim = mid
+// 0 you want to discard -> ini = mid + 1
+// at the end, ini = fim -> your answer is in ini
+
+// 11111111111111 -> ini = fim = 0
+// 00000000000000 -> ini = R + 1
+
+// Prefer to use recursive implementation
+
 int bb(int x){
     int ini = 0, fim = sz(v), mid;
 
@@ -36,6 +52,32 @@ int bb(int x){
     return -1;
 }
 
+bool f(int x, int idx) {
+    return v[idx] >= x;
+}
+
+// Always start with real_r + 1 -> 
+// You can have a case in 000000000 -> return real_r + 1
+int bb_rec(int x, int l, int r) {
+    if (l==r) return l;
+
+    int mid = l + (r-l)/2;
+
+    return f(x, mid) ? bb_rec(x, l, mid) : bb_rec(x, mid+1, r);
+}
+
+set<int> s;
+// lower_bound
+// When exists a element = x -> return iterator to element
+// index? -> distance
+
+// se n tem nenhum igual maior que ele -> retorna s.end -> 
+// se ele e o menor de todos, retorna s.begin() - interpretar igual a um elemento no meio
+int idx_lb(int x) {
+    return distance(s.begin(), s.lower_bound(x));
+}
+
+
 signed main(){_
 
     int n;
@@ -47,13 +89,15 @@ signed main(){_
         cin >> num;
 
         v.eb(num);
-
+        s.insert(num);
     }
 
     int x;
     cin >> x;
 
-    cout << bb(x) << endl;
+    // Find first element greater or equal to x
+    cout << bb_rec(x, 0, n) << endl;
+    cout << idx_lb(x) << endl;
 
     return 0;
 }

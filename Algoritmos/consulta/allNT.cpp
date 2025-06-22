@@ -130,6 +130,9 @@ void crivo(int n){ // Pegar todos os primos até n
     }
 }
 
+// Include Teorema Chines dos Restos
+
+
 signed main(){_
 
     return 0;
